@@ -1,0 +1,8 @@
+version: 1
+imports: []
+schemas:
+  - id: MissingSemester
+    title: MissingSemester
+    parent: root
+    children:
+      - pattern: '*'

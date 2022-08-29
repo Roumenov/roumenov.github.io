@@ -1,0 +1,9 @@
+version: 1
+imports: []
+schemas:
+  - id: tool
+    title: tool
+    parent: root
+    children:
+      - pattern: '*'
+    template: tool.template
