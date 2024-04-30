@@ -166,11 +166,11 @@ function draw(){
     // image(pg[3], 0, 0);
   pop();
 
-  fill(foreColor);
-  noStroke();
-  textSize(20);
-  text(round(frameRate()), 20, height - 20);
-  textSize(pgTextSize);
+  // fill(foreColor);
+  // noStroke();
+  // textSize(20);
+  // text(round(frameRate()), 20, height - 20);
+  // textSize(pgTextSize);
 
   if(((configTicker - lastSpot)%stageD - 1) == 0){
     configAdds();
