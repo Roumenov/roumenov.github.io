@@ -53,6 +53,8 @@ var qrcode;
 var p5Canvas;
 var exportURL = "";
 
+var read
+
 function preload(){
   tFont[0] = loadFont("resources/FormulaCondensed-Bold.otf");
   pgTextFactor[0] = 0.85;
@@ -88,19 +90,11 @@ class Utils {
 }
 
 function setup(){
+  urlParams = new URLSearchParams(window.location.search);
+  if(urlParams.has('starterText')){
+    parseCustomUrl();
+  }
   resizeForPreview();
-  // p5Div = document.getElementById("mainCanvas");
-  // p5Canvas = createCanvas(Utils.elementHeight(p5Div), Utils.elementHeight(p5Div));
-  // p5Canvas.parent(p5Div);
-
-  // var dx = (Utils.elementWidth(p5Div) - width)/2;
-  // var dy = (Utils.elementHeight(p5Div) - height)/2;
-
-  // p5Canvas.position(dx,dy);
-
-  // wWindowMin = width/2;
-  // wWindowMax = width;
-  // wWindow = map(wWindowScale, 0, 1, wWindowMin, wWindowMax);
 
   thisDensity = pixelDensity();
 
@@ -240,4 +234,40 @@ function resizeForPreview(){
     findMaxSize();
     setText();
   }
+}
+
+function parseCustomUrl(){
+  var convertText = urlParams.get('01');
+  starterText = convertText.replaceAll("_*_", "\n");
+
+  fontSelect = urlParams.get('02');
+  document.getElementById("fontChange").value = fontSelect;
+
+  // pgTextSize = int(urlParams.get('pgTextSize'));
+  // document.getElementById("pgTextSize").value = map(pgTextSize, 10, 400, 0, 100);
+  // coreScale = pgTextSize/250;
+
+  // fillColor = color(urlParams.get('fillColor'));
+  // var returnFillColor = fillColor.toString('#rrggbb');
+  // document.getElementById("fillColor").value = returnFillColor;
+
+  // bkgdColor = color(urlParams.get('bkgdColor'));
+  // var returnBkgdColor = bkgdColor.toString('#rrggbb');
+  // document.getElementById("bkgdColor").value = returnBkgdColor;
+
+  // strokeColor = color(urlParams.get('strokeColor'));
+  // var returnstrokeColor = strokeColor.toString('#rrggbb');
+  // document.getElementById("strokeColor").value = returnstrokeColor;
+
+  // coreSW = urlParams.get('coreSW');
+  // document.getElementById("coreSW").value = map(coreSW, 0, 4, 1, 100);
+
+  // detailFactor = urlParams.get('detailFactor');
+  // document.getElementById("detailFactor").value = map(detailFactor, 1.5, 0.3, 1, 100);
+
+  // blastFactor = urlParams.get('blastFactor');
+  // document.getElementById("blastFactor").value = map(blastFactor, 0.5, 3, 1, 100);
+
+  // ratioFactor = urlParams.get('ratioFactor');
+  // document.getElementById("ratioFactor").value = map(ratioFactor, 0.1, 4, 1, 100);
 }
