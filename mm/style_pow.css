@@ -271,7 +271,7 @@ div.module{
 /* ///////////////////// mobile */
 
 .content1_m{
-  border: 0.5px solid gray;
+  /* border: 0.5px solid gray; */
   display:flex;
   flex-direction:column;
   width:50%;

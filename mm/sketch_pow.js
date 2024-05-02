@@ -233,7 +233,7 @@ function resizeForPreview(){
     coreMousePop.refresh(orgX, orgY);
 
     findMaxSize();
-    setText();
+    setText(starterText);
   }
 }
 
