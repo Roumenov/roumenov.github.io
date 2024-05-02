@@ -240,9 +240,11 @@ function resizeForPreview(){
 function parseCustomUrl(){
   var convertText = urlParams.get('01');
   starterText = convertText.replaceAll("_*_", "\n");
+  print("NEW STARTER TEXT: " + starterText);
 
-  fontSelect = urlParams.get('02');
-  document.getElementById("fontChange").value = fontSelect;
+  print("test for the next: " + urlParams.get('02'));
+  // fontSelect = urlParams.get('02');
+  // document.getElementById("fontChange").value = fontSelect;
 
   // pgTextSize = int(urlParams.get('pgTextSize'));
   // document.getElementById("pgTextSize").value = map(pgTextSize, 10, 400, 0, 100);
