@@ -234,9 +234,9 @@ function createExportURL(){
   url += '?01=' + tempString;
   url += '&02=' + fontSelect;
   url += '&03=' + round(wWindowScale, 2);
-  url += '&04=' + fillColor; //color(fillColor);
-  url += '&05=' + bkgdColor; //color(bkgdColor);
-  url += '&06=' + strokeColor; //color(strokeColor);
+  url += '&04=' + color(fillColor);
+  url += '&05=' + color(bkgdColor);
+  url += '&06=' + color(strokeColor);
   url += '&07=' + round(coreSW, 2);
   url += '&08=' + round(detailFactor, 2);
   url += '&09=' + round(blastFactor, 2);
