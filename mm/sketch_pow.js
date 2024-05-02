@@ -243,34 +243,38 @@ function parseCustomUrl(){
   print("NEW STARTER TEXT: " + starterText);
 
   print("test for the next: " + urlParams.get('02'));
-  // fontSelect = urlParams.get('02');
+  fontSelect = urlParams.get('02');
   // document.getElementById("fontChange").value = fontSelect;
 
-  // pgTextSize = int(urlParams.get('pgTextSize'));
+  wWindowScale = urlParams.get('03');
   // document.getElementById("pgTextSize").value = map(pgTextSize, 10, 400, 0, 100);
   // coreScale = pgTextSize/250;
 
-  // fillColor = color(urlParams.get('fillColor'));
+  fillColor = color(urlParams.get('04'));
   // var returnFillColor = fillColor.toString('#rrggbb');
   // document.getElementById("fillColor").value = returnFillColor;
 
-  // bkgdColor = color(urlParams.get('bkgdColor'));
+  bkgdColor = color(urlParams.get('05'));
   // var returnBkgdColor = bkgdColor.toString('#rrggbb');
   // document.getElementById("bkgdColor").value = returnBkgdColor;
 
-  // strokeColor = color(urlParams.get('strokeColor'));
+  strokeColor = color(urlParams.get('06'));
   // var returnstrokeColor = strokeColor.toString('#rrggbb');
   // document.getElementById("strokeColor").value = returnstrokeColor;
 
-  // coreSW = urlParams.get('coreSW');
+  coreSW = urlParams.get('07');
   // document.getElementById("coreSW").value = map(coreSW, 0, 4, 1, 100);
 
-  // detailFactor = urlParams.get('detailFactor');
+  detailFactor = urlParams.get('08');
   // document.getElementById("detailFactor").value = map(detailFactor, 1.5, 0.3, 1, 100);
 
-  // blastFactor = urlParams.get('blastFactor');
+  blastFactor = urlParams.get('09');
   // document.getElementById("blastFactor").value = map(blastFactor, 0.5, 3, 1, 100);
 
-  // ratioFactor = urlParams.get('ratioFactor');
+  ratioFactor = urlParams.get('10');
   // document.getElementById("ratioFactor").value = map(ratioFactor, 0.1, 4, 1, 100);
+
+  blastType = urlParams.get('11');
+  spurMessyToggle = urlParams.get('12');
+  saveMode = urlParams.get('13');
 }
