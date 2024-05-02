@@ -65,6 +65,7 @@ var scaler = 0.75;
 
 var marksOn = true;
 var bkgdAnimOn = true;
+var widgetOn = true;
 
 function preload(){
   tFont[0] = loadFont("resources/FuturaStd-ExtraBold.otf");
