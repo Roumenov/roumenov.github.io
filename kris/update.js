@@ -60,7 +60,7 @@ function findMaxSize(){
   pgTextSize = sizeHolder;
   tracking = -pgTextSize/10;
 
-  print("newPGtextSize is: " + pgTextSize);
+  // print("newPGtextSize is: " + pgTextSize);
 
   fullH = inputText.length * sizeHolder * tFontFactor[selFont];
   fullW = textWidth(inputText[longestLine]);
@@ -117,6 +117,13 @@ function configAdds(){
     } else {
       zigSpot[p][0] = -10000; /// don't run
     }
+
+    hrAddSpot[p];
+    if(inputText[p].length > 2){
+      hrAddSpot[p] = int(random(1, inputText[p].length - 1));
+    } else {
+      hrAddSpot[p] = -10000; /// don't run
+    }
   }
 
   topScribSpot = int(random(inputText[0].length - 1));
@@ -137,6 +144,14 @@ function setScaler(val){
   
   findMaxSize();
   createAnimation();
+}
+
+function toggleMarksOn(){
+  marksOn = !marksOn;
+}
+
+function toggleBkgdAnimOn(){
+  bkgdAnimOn = !bkgdAnimOn;
 }
 
 // var stageA = 90;

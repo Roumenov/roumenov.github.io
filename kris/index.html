@@ -15,6 +15,7 @@
   <script src="animators.js" type="text/javascript"></script>
 
   <script src="classBase.js" type="text/javascript"></script>
+  <script src="classHR.js" type="text/javascript"></script>
   <script src="classLet.js" type="text/javascript"></script>
   <script src="classScribble.js" type="text/javascript"></script>
   <script src="classHump.js" type="text/javascript"></script>
@@ -52,6 +53,14 @@
             <input type="range" min="0" max="100" value="75" id="scaler" oninput="setScaler(this.value)">
           </div>
 
+          <div class="coupling1">
+            <label class="coupling_label_check" for="bkgdAnimOn">Background</label>
+            <input type="checkbox" id="bkgdAnimOn" name="bkgdAnimOn" onclick="toggleBkgdAnimOn()" checked>
+          </div>
+          <div class="coupling1">
+            <label class="coupling_label_check" for="marksOn">Scribbles</label>
+            <input type="checkbox" id="marksOn" name="marksOn" onclick="toggleMarksOn()" checked>
+          </div>
         </div>
       </div>
 

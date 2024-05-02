@@ -87,6 +87,9 @@ class Let {
     this.zig;
     this.zigOn;
 
+    this.hrAdd;
+    this.hrAddOn;
+
     this.scribAdd;
     this.scribAddOn;
 
@@ -101,24 +104,30 @@ class Let {
     if(this.boxOn){
       this.displayBox();
     }
-
-    if(this.scribbleOn){
-      this.scribble.run();
+    if(marksOn){
+      if(this.scribbleOn){
+        this.scribble.run();
+      }
     }
 
     this.displayType();
 
-    if(this.humpOn){
-      this.hump.run();
-    }
-    if(this.scribAddOn){
-      this.scribAdd.run();
-    }
-    if(this.confettiOn){
-      this.confetti.run();
-    }
-    if(this.zigOn){
-      this.zig.run();
+    if(marksOn){
+      if(this.humpOn){
+        this.hump.run();
+      }
+      if(this.scribAddOn){
+        this.scribAdd.run();
+      }
+      if(this.confettiOn){
+        this.confetti.run();
+      }
+      if(this.zigOn){
+        this.zig.run();
+      }
+      if(this.hrAddOn){
+        this.hrAdd.run();
+      }
     }
     // this.displayDebug();
 
@@ -197,7 +206,6 @@ class Let {
       }
       xCulm[this.coreNumber] += this.preShearPush;
     }
-
 
     var newBotX = this.x + (this.w * this.vecFac) * this.wActual + this.preCulm + this.preShearPush;
     var newTopX = this.x + (this.w * this.vecFac) * this.wActual + this.preCulm + this.preShearPush + this.postShearPush;
@@ -312,6 +320,8 @@ class Let {
     this.confetti = null;
     this.zigOn = false;
     this.zig = null;
+    this.hrAddOn = false;
+    this.hrAdd = null;
     this.scribAddOn = false;
     this.scribAdd = null;
     
@@ -342,9 +352,7 @@ class Let {
       this.confettiOn = true;
       this.confetti = new Confetti(this.x, this.y, this.w, this.h, this.wTarget, this.shearTarget, this.ticker);
     }
-    if(this.humpOn){
-      this.confettiOn = false;
-    }
+
 
     if(this.coreNumber == 0 && this.index == topScribSpot){
       this.scribAddOn = true;
@@ -353,6 +361,16 @@ class Let {
     if(this.coreNumber == inputText.length-1 && this.index == botScribSpot){
       this.scribAddOn = true;
       this.scribAdd = new Hump(this.x, this.y, 2, this.ticker);
+    }
+    
+    if(hrAddSpot[this.coreNumber] == this.index){
+      // print("HR added! at: " + this.coreNumber);
+      this.hrAddOn = true;
+      this.hrAdd = new Hr(this.x, this.y, this.w, this.h, int(random(2)), this.ticker);
+    }
+    if(this.humpOn){
+      this.confettiOn = false;
+      this.hrAddOn = false;
     }
 
     if(this.l == "S" ||

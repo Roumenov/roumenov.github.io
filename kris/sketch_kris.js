@@ -53,6 +53,7 @@ var lastSpot = 0;
 var topScribSpot, botScribSpot;
 var humpSpot = [];
 var zigSpot = [];
+var hrAddSpot = [];
 var configTicker = 0;
 
 var animTicker = 0;
@@ -61,6 +62,9 @@ var animBkgdSelect = 0;
 
 var wWindowMin, wWindowMax;
 var scaler = 0.75;
+
+var marksOn = true;
+var bkgdAnimOn = true;
 
 function preload(){
   tFont[0] = loadFont("resources/FuturaStd-ExtraBold.otf");
@@ -128,18 +132,20 @@ function setup(){
 }
 
 function draw(){
-  // image(pgBkgd[animBkgdSelect],0,0);
-  if(animBkgdSelect < 6){
-    image(pgGrad[animBkgdSelect], 0, 0, width, height);
-  } else {
-    image(pgBkgd[animBkgdSelect - 6], 0, 0, width, height);
+  background(30);
+  if(bkgdAnimOn){
+    if(animBkgdSelect < 6){
+      image(pgGrad[animBkgdSelect], 0, 0, width, height);
+    } else {
+      image(pgBkgd[animBkgdSelect - 6], 0, 0, width, height);
+    }
   }
 
   fill(30, animAlpha)
   rect(0, 0, width, height);
 
   push();
-    translate(width/2, height/2);
+    translate(width/2 + tracking, height/2);
 
     // for(var p = 0; p < coreBaseCount; p++){
     //   push();
@@ -221,6 +227,5 @@ function resetAnim(){
   animTicker = 0;
 
   var newBkgd = int(random(pgBkgd.length  + 6));
-  print("NEW BKGD: " + newBkgd);
   animBkgdSelect = newBkgd;
 }

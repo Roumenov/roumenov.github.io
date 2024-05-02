@@ -1,5 +1,5 @@
 class Hr {
-  constructor(x, y, w, ticker){
+  constructor(x, y, w, h, flip, ticker){
     this.x = x;
     this.y = y;
     this.w = w;
@@ -12,11 +12,13 @@ class Hr {
 
     this.res = 0;
     this.resMax = 50;
-    this.resStep = this.resMax/this.pointCount;
     this.col0 = colorSet[int(random(colorSet.length))];
     this.col1 = colorSet[int(random(colorSet.length))];
 
     this.strokeCount = int(random(1,3));
+
+    this.tweak0 = -1 + int(random(2)) * 2;
+    this.tweak1 = -1 + int(random(2)) * 2;
 
     this.makePoints();
   }
@@ -35,14 +37,14 @@ class Hr {
 
     } else if(this.ticker < stageA){
       var tk0 = map(this.ticker, 0, stageA, 0, 1);
-      this.res = map(stageAaccel(tk0), 0, 1, 0, this.resMax - this.resStep/2);
+      this.res = map(stageAaccel(tk0), 0, 1, 0, this.resMax);
 
     } else if(this.ticker < stageB){
-      this.res = this.resMax - this.resStep/2;
+      this.res = this.resMax;
 
     } else if(this.ticker < stageC){
       var tk0 = map(this.ticker, stageB, stageC, 0, 1);
-      this.res = map(stageBaccel(tk0), 0, 1, this.resMax - this.resStep/2, 0);
+      this.res = map(stageBaccel(tk0), 0, 1, this.resMax, 0);
 
     } else {
       this.res = 0;
@@ -50,7 +52,6 @@ class Hr {
     }
 
     this.res = constrain(this.res, 0, this.resMax);
-
   }
 
   display(){
@@ -68,16 +69,14 @@ class Hr {
           strokeWeight(4);
         }
 
-        for(var m = 1; m < this.res - this.resStep; m++){
-          var p = floor(m/this.resStep) + 1;
-          var t = (m - ((p-1) * this.resStep))/this.resStep;
-          var x = bezierPoint(this.points[p-1].x, this.points[p - 1].x + this.points[p - 1].xH, this.points[p].x + this.points[p].xH, this.points[p].x, t);
-          var y = bezierPoint(this.points[p-1].y, this.points[p - 1].y + this.points[p - 1].yH, this.points[p].y + this.points[p].yH, this.points[p].y, t);
+        for(var m = 1; m < this.res; m++){
+          var t = m/this.resMax;
+          var x = bezierPoint(this.points[0].x, this.points[0].x - this.tweak0 * this.points[0].xH, this.points[1].x - this.tweak1 * this.points[1].xH, this.points[1].x, t);
+          var y = bezierPoint(this.points[0].y, this.points[0].y - this.tweak0 * this.points[0].yH, this.points[1].y - this.tweak1 * this.points[1].yH, this.points[1].y, t);
   
-          var preP = floor((m-1)/this.resStep) + 1;
-          var preT = ((m-1) - ((preP-1) * this.resStep))/this.resStep;
-          var preX = bezierPoint(this.points[preP-1].x, this.points[preP - 1].x + this.points[preP - 1].xH, this.points[preP].x + this.points[preP].xH, this.points[preP].x, preT);
-          var preY = bezierPoint(this.points[preP-1].y, this.points[preP - 1].y + this.points[preP - 1].yH, this.points[preP].y + this.points[preP].yH, this.points[preP].y, preT);
+          var preT = (m-1)/this.resMax;
+          var preX = bezierPoint(this.points[0].x, this.points[0].x - this.tweak0 * this.points[0].xH, this.points[1].x - this.tweak1 * this.points[1].xH, this.points[1].x, preT);
+          var preY = bezierPoint(this.points[0].y, this.points[0].y - this.tweak0 * this.points[0].yH, this.points[1].y - this.tweak1 * this.points[1].yH, this.points[1].y, preT);
   
           line(x, y, preX, preY);
         }
@@ -95,20 +94,45 @@ class Hr {
       noFill();
       beginShape();
         vertex(this.points[0].x, this.points[0].y);
-        for(var m = 1; m < this.pointCount; m++){
-          bezierVertex(
-            this.points[m - 1].x - this.points[m - 1].xH, this.points[m - 1].y - this.points[m - 1].yH,
-            this.points[m].x + this.points[m].xH, this.points[m].y + this.points[m].yH,
-            this.points[m].x, this.points[m].y
-            );
-        }
+        bezierVertex(
+          this.points[0].x - this.tweak0 * this.points[0].xH, this.points[0].y - this.tweak0 * this.points[0].yH,
+          this.points[1].x - this.tweak1 * this.points[1].xH, this.points[1].y - this.tweak1 * this.points[1].yH,
+          this.points[1].x, this.points[1].y
+          );
       endShape();
     pop();
   }
 
   makePoints(){
-    this.points[0] = {
+    var y_;
+    var ang0_;
+    var ang1_;
 
+    var direct0 = -1 + int(random(2)) * 2;
+    var direct1 = -1 + int(random(2)) * 2;
+    var randomAng = random(PI/8);
+
+    if(this.flip == 0){
+      y_ = -this.h/8;
+      ang0_ = -randomAng;
+      ang1_ = -PI + randomAng;
+    } else {
+      y_ = -this.h * 7/8;
+      ang0_ = randomAng;
+      ang1_ = PI - randomAng;
+    }
+
+    this.points[0] = {
+      x: -this.w,
+      y: y_,
+      xH: cos(direct0 * ang0_) * this.w,
+      yH: sin(direct0 * ang0_) * this.w,
+    }
+    this.points[1] = {
+      x: this.w,
+      y: y_,
+      xH: cos(direct1 * ang1_) * this.w,
+      yH: sin(direct1 * ang1_) * this.w,
     }
 
 

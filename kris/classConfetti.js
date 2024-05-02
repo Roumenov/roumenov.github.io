@@ -145,7 +145,7 @@ class Confetti {
       direct *= 1;
     }
     this.a0start = startAng + direct * random(-PI/2, -PI/4);
-    this.a0target = startAng + direct * random(PI, PI * 3/2);
+    this.a0target = startAng + direct * random(PI/4, PI);
     this.a1start = this.a0start;
     this.a1target = this.a0target + direct * random(PI/16, PI/4);
 
