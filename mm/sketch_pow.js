@@ -91,7 +91,7 @@ class Utils {
 
 function setup(){
   urlParams = new URLSearchParams(window.location.search);
-  if(urlParams.has('starterText')){
+  if(urlParams.has('01')){
     parseCustomUrl();
   }
   resizeForPreview();
@@ -164,6 +164,7 @@ function windowResized(){
 }
 
 function parseCustomUrl(){
+  print("URL PARSED!");
   var convertText = urlParams.get('starterText');
   starterText = convertText.replaceAll("_*_", "\n");
 }
