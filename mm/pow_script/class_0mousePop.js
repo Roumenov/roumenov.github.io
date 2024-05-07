@@ -76,12 +76,14 @@ class MousePop {
     stroke(strokeColor);
     strokeWeight(coreSW);
 
-    for(var m = 0; m < this.debrisCount; m++){
-      push();
-        translate(this.currentVec[m].x, this.currentVec[m].y);
-        rotate(this.ang[m]);
-        ellipse(0, 0, this.w[m], this.h[m]);
-      pop();
+    if(coreTicker > 0){
+      for(var m = 0; m < this.debrisCount; m++){
+        push();
+          translate(this.currentVec[m].x, this.currentVec[m].y);
+          rotate(this.ang[m]);
+          ellipse(0, 0, this.w[m], this.h[m]);
+        pop();
+      }
     }
   }
 
@@ -98,7 +100,7 @@ class MousePop {
   refresh(x, y){
     this.origVec.set(x, y);
 
-    this.debrisCount = int(random(8, 18));
+    this.debrisCount = int(random(12, 25));
     this.currentVec = [];
     this.targetVec = [];
     this.animWindowDebris1 = [];
@@ -131,7 +133,7 @@ class MousePop {
       this.animWindowDebris2[m] = 100;
       this.tickerDebris[m] = 0;
 
-      this.w[m] = random(7, 15);
+      this.w[m] = random(7, 15) * coreScale;
       this.h[m] = this.w[m] * random(1, 2);
       this.ang[m] = culmAng + PI/2;
     }

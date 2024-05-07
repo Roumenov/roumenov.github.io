@@ -259,9 +259,16 @@ div.module{
 }
 #recStatus{
   display:none;
-  width:190px;
-  padding-top:7px;
-  padding-bottom:1px;
+  /* display:block; */
+  position:absolute;
+  width:100%;
+  height:15px;
+  padding-top:2px;
+  padding-bottom:5px;
+  bottom:0;
+
+  text-align:center;
+
   background-color:red
 }
 #cloudOption1{ display:flex; }

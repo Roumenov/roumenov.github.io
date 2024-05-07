@@ -82,7 +82,9 @@ function setBkgdColor(val){ bkgdColor = val; }
 function setStrokeColor(val){ strokeColor = val; }
 
 function setCoreSW(val){
-  coreSW = map(val, 1, 100, 0, 4);
+  coreSWfac = map(val, 1, 100, 0, 4);
+
+  rescaleValues();
 }
 
 function setDetailFactor(val){
@@ -171,34 +173,34 @@ function setBlastType(val){
   buildIt();
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  const popupOverlay = document.getElementById('popupOverlay');
-  const popup = document.getElementById('popup');
-  const closePopup = document.getElementById('closePopup');
-  const emailInput = document.getElementById('emailInput');
-  // Function to open the popup
+// document.addEventListener('DOMContentLoaded', function () {
+//   const popupOverlay = document.getElementById('popupOverlay');
+//   const popup = document.getElementById('popup');
+//   const closePopup = document.getElementById('closePopup');
+//   const emailInput = document.getElementById('emailInput');
+//   // Function to open the popup
 
-  function openPopup() {
-    popupOverlay.style.display = 'block';
-  }
+//   function openPopup() {
+//     popupOverlay.style.display = 'block';
+//   }
 
-  // Function to close the popup
+//   // Function to close the popup
 
-  function closePopupFunc() {
-    popupOverlay.style.display = 'none';
-  }
+//   function closePopupFunc() {
+//     popupOverlay.style.display = 'none';
+//   }
 
-  // openPopup();
-  // Close the popup when the close button is clicked
-  closePopup.addEventListener('click', closePopupFunc);
-  // Close the popup when clicking outside the popup content
-  popupOverlay.addEventListener('click', function (event) {
-      if (event.target === popupOverlay) {
-        closePopupFunc();
-      }
-  });
-  // You can customize and expand these functions based on your specific requirements.
-});
+//   // openPopup();
+//   // Close the popup when the close button is clicked
+//   closePopup.addEventListener('click', closePopupFunc);
+//   // Close the popup when clicking outside the popup content
+//   popupOverlay.addEventListener('click', function (event) {
+//       if (event.target === popupOverlay) {
+//         closePopupFunc();
+//       }
+//   });
+//   // You can customize and expand these functions based on your specific requirements.
+// });
 
 function runShare(){
   // print("SHARE IT!");
@@ -237,7 +239,7 @@ function createExportURL(){
   url += '&04=' + color(fillColor);
   url += '&05=' + color(bkgdColor);
   url += '&06=' + color(strokeColor);
-  url += '&07=' + round(coreSW, 2);
+  url += '&07=' + round(coreSWfac, 2);
   url += '&08=' + round(detailFactor, 2);
   url += '&09=' + round(blastFactor, 2);
   url += '&10=' + round(ratioFactor, 2);

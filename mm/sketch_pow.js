@@ -20,6 +20,7 @@ var coreMousePop;
 var orgX, orgY;
 var coreScale = 1;
 var coreSW = 2;
+var coreSWfac = 2;
 var widgetOn = true;
 
 var blastFactor = 1;
@@ -29,11 +30,6 @@ let spurMessyToggle = false;
 
 var mousePopOn = true;
 
-const frate = 30;
-var numFrames = 300;
-let recording = false;
-let recordedFrames = 0;
-
 let thisDensity = 2;
 let recMessageOn = false;
 
@@ -41,6 +37,11 @@ let blastType = 0;
 
 let coreTicker = 0;
 let coreAnimWindow = 98;
+
+const frate = 30;
+var numFrames = coreAnimWindow * 3;
+let recording = false;
+let recordedFrames = 0;
 
 let wWindow = 0;
 let wWindowMax, wWindowMin;
@@ -52,8 +53,6 @@ var qrcode;
 
 var p5Canvas;
 var exportURL = "";
-
-var read
 
 function preload(){
   tFont[0] = loadFont("resources/FormulaCondensed-Bold.otf");
@@ -104,11 +103,14 @@ function setup(){
     coreMousePop = new MousePop(orgX, orgY);
   }
 
+  noSmooth();
   frameRate(frate);
 
   textFont(tFont[fontSelect]);
   textSize(pgTextSize);
   strokeJoin(ROUND);
+
+  scaleValues();
 
   if(document.getElementById("text0") != null){
     document.getElementById("text0").value = starterText;
@@ -136,6 +138,13 @@ function draw(){
     coreTicker = 0;
   }
   coreTicker++;
+}
+
+function scaleValues(){
+  print("RESCALED!");
+
+  coreSW = coreSWfac * width/1080;
+  coreScale = width/1080;
 }
 
 function mousePressed(){
@@ -232,8 +241,48 @@ function resizeForPreview(){
     coreSplode.refresh();
     coreMousePop.refresh(orgX, orgY);
 
+    scaleValues();
     findMaxSize();
     setText(starterText);
+    coreTicker = 0;
+  }
+}
+
+function resizeForSave(){
+  p5Div = document.getElementById("mainCanvas");
+
+  var baseWidth = Utils.elementWidth(p5Div)
+  var baseHeight = Utils.elementHeight(p5Div);
+
+  if(saveMode == 0){
+    resizeCanvas(baseWidth, baseHeight);
+  } else if(saveMode == 1){
+    resizeCanvas(1080, 1920);
+  } else if(saveMode == 2){
+    resizeCanvas(1080, 1080);
+  }
+
+  var dx = (baseWidth - width)/2;
+  var dy = (baseHeight - height)/2;
+
+  p5Canvas.position(dx,dy);
+
+  cwidth = width;
+  cheight = height;
+
+  wWindowMin = width/2;
+  wWindowMax = width;
+  wWindow = map(wWindowScale, 0, 1, wWindowMin, wWindowMax);
+
+  if(inputText != null){
+    coreSplode.refresh();
+    coreMousePop.refresh(orgX, orgY);
+
+    scaleValues();
+    findMaxSize();
+    setText(starterText);
+    coreTicker = 0;
+
   }
 }
 
@@ -244,37 +293,17 @@ function parseCustomUrl(){
 
   print("test for the next: " + urlParams.get('02'));
   fontSelect = urlParams.get('02');
-  // document.getElementById("fontChange").value = fontSelect;
-
   wWindowScale = urlParams.get('03');
-  // document.getElementById("pgTextSize").value = map(pgTextSize, 10, 400, 0, 100);
-  // coreScale = pgTextSize/250;
-
   fillColor = color(urlParams.get('04'));
-  // var returnFillColor = fillColor.toString('#rrggbb');
-  // document.getElementById("fillColor").value = returnFillColor;
-
   bkgdColor = color(urlParams.get('05'));
-  // var returnBkgdColor = bkgdColor.toString('#rrggbb');
-  // document.getElementById("bkgdColor").value = returnBkgdColor;
-
   strokeColor = color(urlParams.get('06'));
-  // var returnstrokeColor = strokeColor.toString('#rrggbb');
-  // document.getElementById("strokeColor").value = returnstrokeColor;
-
   coreSW = urlParams.get('07');
-  // document.getElementById("coreSW").value = map(coreSW, 0, 4, 1, 100);
-
   detailFactor = urlParams.get('08');
-  // document.getElementById("detailFactor").value = map(detailFactor, 1.5, 0.3, 1, 100);
-
   blastFactor = urlParams.get('09');
-  // document.getElementById("blastFactor").value = map(blastFactor, 0.5, 3, 1, 100);
-
   ratioFactor = urlParams.get('10');
-  // document.getElementById("ratioFactor").value = map(ratioFactor, 0.1, 4, 1, 100);
-
   blastType = urlParams.get('11');
   spurMessyToggle = urlParams.get('12');
   saveMode = urlParams.get('13');
+
+  scaleValues();
 }

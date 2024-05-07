@@ -139,7 +139,8 @@ class SpurLetter {
   }
 
   createPoints(){
-    var sampleFac = map(detailFactor, 1.5, 0.3, 0.04, 0.175)
+    var sampleFac = map(detailFactor, 1.5, 0.3, 0.04, 0.175)/coreScale;
+    print("SPUR! " + sampleFac);
 
     var holdPoints = tFont[fontSelect].textToPoints(this.letter, this.x, this.y, pgTextSize, {sampleFactor: sampleFac}); // 0.085
     this.testPoints = tFont[fontSelect].textToPoints(this.letter, this.x, this.y, pgTextSize, {sampleFactor: sampleFac}); // 0.085

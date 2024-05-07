@@ -35,7 +35,12 @@ class SplodeLetter {
   }
 
   setValue(){
-    this.bumpMin = coreScale * 2 * detailFactor;
+    // this.bumpMin = coreScale * 2 * detailFactor;
+    // this.bumpMax = this.bumpMin * 5;
+    // this.influMin = coreScale * 2.5 * blastFactor;
+    // this.influMax = this.influMin * 12;
+
+    this.bumpMin = 2 * detailFactor;
     this.bumpMax = this.bumpMin * 5;
     this.influMin = coreScale * 2.5 * blastFactor;
     this.influMax = this.influMin * 12;
@@ -191,8 +196,15 @@ class SplodeLetter {
   }
 
   createPoints(){
-    var holdPoints = tFont[fontSelect].textToPoints(this.letter, this.x, this.y, pgTextSize, {sampleFactor: 0.2});
-    this.testPoints = tFont[fontSelect].textToPoints(this.letter, this.x, this.y, pgTextSize, {sampleFactor: 0.2});
+    // var sampleFactorScaler = map(width, 250, 2160, 0.4, 0.025);
+    // print(sampleFactorScaler);
+    var sampleFactorScaler = 0.2/coreScale;
+    print(sampleFactorScaler);
+
+    var holdPoints = tFont[fontSelect].textToPoints(this.letter, this.x, this.y, pgTextSize, {sampleFactor: sampleFactorScaler});
+    this.testPoints = tFont[fontSelect].textToPoints(this.letter, this.x, this.y, pgTextSize, {sampleFactor: sampleFactorScaler});
+    // var holdPoints = tFont[fontSelect].textToPoints(this.letter, this.x, this.y, pgTextSize, {sampleFactor: 0.2});
+    // this.testPoints = tFont[fontSelect].textToPoints(this.letter, this.x, this.y, pgTextSize, {sampleFactor: 0.2});
 
     var pathCount = 0;
     var pointCount = 0;

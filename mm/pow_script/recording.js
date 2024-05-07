@@ -26,7 +26,7 @@ function runRecording(){
 
     toggleRecMessage();
 
-    // resizeForPreview();
+    resizeForPreview();
     pixelDensity(thisDensity);
   }
 }
@@ -43,7 +43,7 @@ function runSave(){
 }
 
 function setRecorder(){
-  // resizeForSave();
+  resizeForSave();
 
   pixelDensity(1);
 
