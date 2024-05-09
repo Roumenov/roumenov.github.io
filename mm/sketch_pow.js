@@ -305,5 +305,16 @@ function parseCustomUrl(){
   spurMessyToggle = urlParams.get('12');
   saveMode = urlParams.get('13');
 
+  document.getElementById("window").checked = false;
+  document.getElementById("vert").checked = false;
+  document.getElementById("squa").checked = false;
+  if(saveMode == 0){
+    document.getElementById("window").checked = true;
+  } else if(saveMode == 1){
+    document.getElementById("vert").checked = true;
+  } else if(saveMode == 2){
+    document.getElementById("squa").checked = true;
+  }
+
   scaleValues();
 }
