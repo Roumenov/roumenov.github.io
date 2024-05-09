@@ -84,7 +84,7 @@ function setStrokeColor(val){ strokeColor = val; }
 function setCoreSW(val){
   coreSWfac = map(val, 1, 100, 0, 4);
 
-  rescaleValues();
+  scaleValues();
 }
 
 function setDetailFactor(val){

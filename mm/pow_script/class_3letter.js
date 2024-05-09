@@ -199,7 +199,6 @@ class SplodeLetter {
     // var sampleFactorScaler = map(width, 250, 2160, 0.4, 0.025);
     // print(sampleFactorScaler);
     var sampleFactorScaler = 0.2/coreScale;
-    print(sampleFactorScaler);
 
     var holdPoints = tFont[fontSelect].textToPoints(this.letter, this.x, this.y, pgTextSize, {sampleFactor: sampleFactorScaler});
     this.testPoints = tFont[fontSelect].textToPoints(this.letter, this.x, this.y, pgTextSize, {sampleFactor: sampleFactorScaler});

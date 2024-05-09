@@ -141,7 +141,7 @@ function draw(){
 }
 
 function scaleValues(){
-  print("RESCALED!");
+  // print("RESCALED!");
 
   coreSW = coreSWfac * width/1080;
   coreScale = width/1080;
@@ -171,13 +171,6 @@ function buildIt(){
 function windowResized(){
   resizeForPreview();
 }
-
-function parseCustomUrl(){
-  print("URL PARSED!");
-  var convertText = urlParams.get('starterText');
-  starterText = convertText.replaceAll("_*_", "\n");
-}
-
 
 function resizeForPreview(){
   p5Div = document.getElementById("mainCanvas");
@@ -289,9 +282,7 @@ function resizeForSave(){
 function parseCustomUrl(){
   var convertText = urlParams.get('01');
   starterText = convertText.replaceAll("_*_", "\n");
-  print("NEW STARTER TEXT: " + starterText);
 
-  print("test for the next: " + urlParams.get('02'));
   fontSelect = urlParams.get('02');
   wWindowScale = urlParams.get('03');
   fillColor = color(urlParams.get('04'));
