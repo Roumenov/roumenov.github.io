@@ -288,7 +288,7 @@ function parseCustomUrl(){
   fillColor = color(urlParams.get('04'));
   bkgdColor = color(urlParams.get('05'));
   strokeColor = color(urlParams.get('06'));
-  coreSW = urlParams.get('07');
+  coreSWfac = urlParams.get('07');
   detailFactor = urlParams.get('08');
   blastFactor = urlParams.get('09');
   ratioFactor = urlParams.get('10');
@@ -307,5 +307,6 @@ function parseCustomUrl(){
     document.getElementById("squa").checked = true;
   }
 
+  resizeForPreview();
   scaleValues();
 }
