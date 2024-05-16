@@ -120,7 +120,7 @@ textarea{
 }
 h2{
   font-family: "IBM Plex Mono", monospace;
-  font-weight: 200;
+  font-weight: 400;
   font-size:16px;
   color:#fff;
   margin:0px;
@@ -198,7 +198,7 @@ div.color_label{
 }
 p {
   font-family: "IBM Plex Mono", monospace;
-  font-weight: 400;
+  font-weight: 200;
   font-size:10px;
   font-style: italic;
   color:#fff;
