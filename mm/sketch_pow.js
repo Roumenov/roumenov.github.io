@@ -1,4 +1,4 @@
-var bkgdColor = '#35bdf0';
+var bkgdColor = '#5080bf';
 var strokeColor = '#000000';
 var fillColor = '#ffffff';
 
@@ -66,6 +66,9 @@ function preload(){
 
   tFont[3] = loadFont("resources/TT Bluescreens Trial Medium.otf");
   pgTextFactor[3] = 0.75;
+
+  tFont[4] = loadFont("resources/Milligram-Heavy.otf");
+  pgTextFactor[4] = 0.75;
 }
 
 class Utils {
@@ -92,7 +95,10 @@ function setup(){
   urlParams = new URLSearchParams(window.location.search);
   if(urlParams.has('01')){
     parseCustomUrl();
+  } else {
+    selectRandom();
   }
+
   resizeForPreview();
 
   thisDensity = pixelDensity();
@@ -275,14 +281,12 @@ function resizeForSave(){
     findMaxSize();
     setText(starterText);
     coreTicker = 0;
-
   }
 }
 
 function parseCustomUrl(){
   var convertText = urlParams.get('01');
   starterText = convertText.replaceAll("_*_", "\n");
-
   fontSelect = urlParams.get('02');
   wWindowScale = urlParams.get('03');
   fillColor = color(urlParams.get('04'));
@@ -309,4 +313,92 @@ function parseCustomUrl(){
 
   resizeForPreview();
   scaleValues();
+}
+
+function selectRandom(){
+  var rs0 = random(60);
+
+  if(rs0 < 10){
+    // DEFAULT
+  } else if(rs0 < 20){
+    starterText = "OK";
+    fontSelect = 1;
+    wWindowScale = 0.25;
+    bkgdColor = color(0,0,0);
+    coreSWfac = 0;
+    detailFactor = 1.22;
+    blastFactor = 3;
+    blastType = 1;
+  } else if(rs0 < 30){
+    starterText = "I WANT\nTIME\nI WANT\nSPACE";
+    fontSelect = 3;
+    wWindowScale = 0.6;
+    bkgdColor = color(242,70,53);
+    fillColor = color(242,175,199);
+    coreSWfac = 0;
+    detailFactor = 0.3;
+    blastFactor = 2.293;
+    ratioFactor = 2.385;
+    saveMode = 1;
+  } else if(rs0 < 40){
+    starterText = "AND\nBEGIN\nAGAIN";
+    bkgdColor = color(255,255,255);
+    fillColor = color(255,255,255);
+    coreSWfac = 3;
+  } else if(rs0 < 50){
+    starterText = "ALL\nTHIS\nAND\nMORE";
+    bkgdColor = color(80,128,191);
+    strokeColor = color(242,175,199);
+    fillColor = color(255,255,255);
+    fontSelect = 4;
+    coreSWfac = 2.5;
+    detailFactor = 1.003;
+    blastFactor = 1.864;
+    ratioFactor = 1.006;
+  } else if(rs0 < 60){
+    starterText = "AND\nBEGIN\nAGAIN";
+    bkgdColor = color(0,0,0);
+    fillColor = color(242,181,65);
+    fontSelect = 0;
+    coreSWfac = 0;
+    detailFactor = 0.5666;
+    blastFactor = 3;
+    blastType = 1;
+    saveMode = 0;
+  }
+
+  document.getElementById("text0").value = starterText;
+  document.getElementById("fontChange").value = fontSelect;
+  document.getElementById("pgTextSize").value = map(wWindowScale, 0, 1, 0, 100);
+  var returnFillColor = fillColor.toString('#rrggbb');
+  document.getElementById("fillColor").value = returnFillColor;
+  var returnBkgdColor = bkgdColor.toString('#rrggbb');
+  document.getElementById("bkgdColor").value = returnBkgdColor;
+  var returnstrokeColor = strokeColor.toString('#rrggbb');
+  document.getElementById("strokeColor").value = returnstrokeColor;
+  document.getElementById("coreSW").value = map(coreSWfac, 0, 4, 1, 100);
+  document.getElementById("blastType").value = blastType;
+  document.getElementById("detailFactor").value = map(detailFactor, 1.5, 0.3, 1, 100);
+  document.getElementById("blastFactor").value = map(blastFactor, 0.5, 3, 1, 100);
+  document.getElementById("ratioFactor").value = map(ratioFactor, 0.1, 4, 1, 100);
+  document.getElementById("messySpur").checked = spurMessyToggle;
+   
+  document.getElementById("window").checked = false;
+  document.getElementById("vert").checked = false;
+  document.getElementById("squa").checked = false;
+  if(saveMode == 0){
+    document.getElementById("window").checked = true;
+  } else if(saveMode == 1){
+    document.getElementById("vert").checked = true;
+  } else if(saveMode == 2){
+    document.getElementById("squa").checked = true;
+  }
+
+  if(blastType == 0){
+    document.getElementById('cloudOption1').style.display = "flex";
+    document.getElementById('spurOption1').style.display = "none";
+  } else {
+    document.getElementById('cloudOption1').style.display = "none";
+    document.getElementById('spurOption1').style.display = "flex";
+  }
 }

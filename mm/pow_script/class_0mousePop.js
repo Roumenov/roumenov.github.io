@@ -33,7 +33,9 @@ class MousePop {
   }
 
   runTop(){
-    this.displayDebris();
+    if(blastType == 0){
+      this.displayDebris();
+    }
   }
 
   update(){

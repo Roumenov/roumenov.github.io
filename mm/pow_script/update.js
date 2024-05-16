@@ -1,4 +1,5 @@
 function setText(val){
+  starterText = val;
   var enteredText = val;
 
   inputText = enteredText.match(/[^\r\n]+/g);
@@ -61,6 +62,7 @@ function findMaxSize(){
 
 function setwWindowScale(val){
   wWindowScale = map(val, 0, 100, 0, 1);
+  print("wWindowScale: " + wWindowScale);
 
   wWindow = map(wWindowScale, 0, 1, wWindowMin, wWindowMax);
   findMaxSize();
@@ -89,6 +91,7 @@ function setCoreSW(val){
 
 function setDetailFactor(val){
   detailFactor = map(val, 1, 100, 1.5, 0.3);
+  print("detailFactor: " + detailFactor);
 
   resetPop();
   coreSplode.refresh();
@@ -96,6 +99,7 @@ function setDetailFactor(val){
 
 function setBlastFactor(val){
   blastFactor = map(val, 1, 100, 0.5, 3);
+  print("blastFactor: " + blastFactor);
 
   resetPop();
   coreSplode.refresh();
@@ -103,6 +107,7 @@ function setBlastFactor(val){
 
 function setRatioFactor(val){
   ratioFactor = map(val, 1, 100, 0.1, 4);
+  print("ratioFactor: " + ratioFactor);
 
   resetPop();
   coreSplode.refresh();
@@ -173,34 +178,34 @@ function setBlastType(val){
   buildIt();
 }
 
-// document.addEventListener('DOMContentLoaded', function () {
-//   const popupOverlay = document.getElementById('popupOverlay');
-//   const popup = document.getElementById('popup');
-//   const closePopup = document.getElementById('closePopup');
-//   const emailInput = document.getElementById('emailInput');
-//   // Function to open the popup
+document.addEventListener('DOMContentLoaded', function () {
+  const popupOverlay = document.getElementById('popupOverlay');
+  const popup = document.getElementById('popup');
+  const closePopup = document.getElementById('closePopup');
+  const emailInput = document.getElementById('emailInput');
+  // Function to open the popup
 
-//   function openPopup() {
-//     popupOverlay.style.display = 'block';
-//   }
+  function openPopup() {
+    popupOverlay.style.display = 'block';
+  }
 
-//   // Function to close the popup
+  // Function to close the popup
 
-//   function closePopupFunc() {
-//     popupOverlay.style.display = 'none';
-//   }
+  function closePopupFunc() {
+    popupOverlay.style.display = 'none';
+  }
 
-//   // openPopup();
-//   // Close the popup when the close button is clicked
-//   closePopup.addEventListener('click', closePopupFunc);
-//   // Close the popup when clicking outside the popup content
-//   popupOverlay.addEventListener('click', function (event) {
-//       if (event.target === popupOverlay) {
-//         closePopupFunc();
-//       }
-//   });
-//   // You can customize and expand these functions based on your specific requirements.
-// });
+  // openPopup();
+  // Close the popup when the close button is clicked
+  closePopup.addEventListener('click', closePopupFunc);
+  // Close the popup when clicking outside the popup content
+  popupOverlay.addEventListener('click', function (event) {
+      if (event.target === popupOverlay) {
+        closePopupFunc();
+      }
+  });
+  // You can customize and expand these functions based on your specific requirements.
+});
 
 function runShare(){
   // print("SHARE IT!");

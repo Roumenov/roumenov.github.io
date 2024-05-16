@@ -66,7 +66,7 @@ body{
   flex-direction:row;
 }
 input[type=text]{
-  width:120px;
+  width:100%;
   margin:5px
 }
 input[type=checkbox]{
@@ -76,9 +76,9 @@ input[type=checkbox]{
   padding-top:0px;
 }
 .slider {
-  margin:7px;
+  margin-top:7px;
   -webkit-appearance: none;
-  width: 110px;
+  width: 66%;
   height: 1px;
   background: #c1c1c1;
   outline: none;
@@ -115,36 +115,37 @@ textarea{
   padding:0;
 
   border:1px solid white;
-  background:#202020;
+  background:#000000;
   color:#fff;
 }
 h2{
-  font-family:"Raleway", sans-serif;
-  font-size:18px;
-  font-weight:500;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 200;
+  font-size:16px;
   color:#fff;
   margin:0px;
 }
 h3{
-  font-family:"Raleway", sans-serif;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
   font-size:12px;
-  font-weight:500;
   color:#fff;
   margin:0
 }
 h4{
-  font-family:"Raleway", sans-serif;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
   font-size:12px;
-  font-weight:700;
   text-transform: uppercase;
   text-decoration: underline;
   color:#fff;
   margin:0;
   padding-right:10px;
+  width:20%;
 }
 .module p{
-  font-family:"Raleway", sans-serif;
-  font-weight:200;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 200;
   font-style:italic;
   color:#00f;
   font-size:10px;
@@ -153,7 +154,8 @@ h4{
 }
 
 select{
-  width:190px;
+  width:100%;
+  margin-bottom:2px;
 
   border:1px solid white;
   background:#000;
@@ -185,20 +187,23 @@ input[type=color]::-webkit-color-swatch{
   flex-direction: column;
   text-align:center;
   margin-right:5px;
+  width:33%;
 }
 div.color_label{
-  width:60px
+  width:100%;
 }
 .module2{
   padding-bottom:10px;
   width:130px
 }
 p {
-  font-family:"Raleway", sans-serif;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
   font-size:10px;
-  font-weight:500;
+  font-style: italic;
   color:#fff;
-  margin-top:2px
+  margin-top:2px;
+  margin-bottom:0;
 }
 .popup-content p{
   font-size:14px;
@@ -210,12 +215,12 @@ a {
   text-decoration:underline
 }
 button{
-  width:190px;
+  width:100%;
   height:75px;
 
   border:1px solid white;
-  background:#000;
-  color:#fff;
+  color:#000;
+  background:#fff;
 }
 .coupling1{
   display:flex;
@@ -235,7 +240,7 @@ button{
 .sizeEntry {
   display:flex;
   flex-direction: row;
-  width:60px;
+  width:26.66%;
   padding-bottom:5px;
 }
 input[type=radio]{
@@ -246,14 +251,14 @@ input[type=radio]{
   padding-top:10px;
 }
 label{
-  font-family:"Raleway", sans-serif;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
   font-size:14px;
-  font-weight:500;
   /* margin-top:2px */
 }
 div.coupling_label{
-  padding-right:10px;
-  width:60px
+  /* padding-right:10px; */
+  width:33%;
 }
 div.module{
   /* margin-bottom:10px */
@@ -323,7 +328,8 @@ div.module{
 }
 
 .popup {
-  font-family:"Raleway", sans-serif;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 200;
   font-weight:200;
   position: absolute;
   top: 50%;
