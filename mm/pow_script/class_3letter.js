@@ -133,6 +133,9 @@ class SplodeLetter {
     fill(fillColor);
     stroke(strokeColor);
     strokeWeight(coreSW * 2);
+    textSize(pgTextSize);
+    textFont(tFont[fontSelect]);
+    textAlign(LEFT);
     text(this.letter, this.x, this.y);
   }
 

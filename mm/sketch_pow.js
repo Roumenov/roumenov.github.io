@@ -69,6 +69,9 @@ function preload(){
 
   tFont[4] = loadFont("resources/Milligram-Heavy.otf");
   pgTextFactor[4] = 0.75;
+
+  tFont[5] = loadFont("resources/IBMPlexMono-Italic.otf");
+
 }
 
 class Utils {
@@ -131,6 +134,24 @@ function draw(){
 
   // stroke(0);
   // line(0, 0, width, height);
+
+  push();
+    if(brightness(bkgdColor) > 90){
+      fill(0, 200);
+    } else {
+      fill(255, 200);
+    }
+    noStroke();
+    textAlign(CENTER);
+    textSize(height/100);
+    textFont(tFont[5]);
+    translate(width/2, height-10);
+    // rotate(PI/2);
+    text("CREATED @ MOTION MOTION", 0, 0);
+    // translate(0, -height + 20);
+    // rotate(PI);
+    // text("CREATED @ MOTION MOTION", 0, 0);
+  pop();
 
   if(mousePopOn){ coreMousePop.runBottom(); }
   coreSplode.run();

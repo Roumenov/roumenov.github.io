@@ -12,9 +12,11 @@ class SpurLetter {
     this.bumpMin, this.bumpMax, this.influMin, this.influMax;
 
     this.ticker = [];
-    this.animWindow = 60;
+    this.animWindow = 50;
+    this.animWindowClose = 100
+    this.animWindow2 = [];
 
-    this.tickerSpeed = 2;
+    this.tickerSpeed = 1;
 
     this.solidToggle = true;
 
@@ -61,7 +63,6 @@ class SpurLetter {
   update(){
     for(var p = 0; p < this.points.length; p++){
       for(var m = 0; m < this.module[p].length; m++){
-        var tk0 = map(this.ticker[p][m], 0, this.animWindow, 0, 1);
 
         if(this.ticker[p][m] < 0){
           this.module[p][m].x = this.module[p][m].xStart;
@@ -69,15 +70,21 @@ class SpurLetter {
           this.module[p][m].xH = 0;
           this.module[p][m].yH = 0; 
         } else if(this.ticker[p][m] < this.animWindow){
+          var tk0 = map(this.ticker[p][m], 0, this.animWindow, 0, 1);
+
           this.module[p][m].x = map(easeOutExpo(tk0), 0, 1, this.module[p][m].xStart, this.module[p][m].xEnd);
           this.module[p][m].y = map(easeOutExpo(tk0), 0, 1, this.module[p][m].yStart, this.module[p][m].yEnd);
           this.module[p][m].xH = map(easeOutExpo(tk0), 0, 1, 0, this.module[p][m].xHend);
           this.module[p][m].yH = map(easeOutExpo(tk0), 0, 1, 0, this.module[p][m].yHend);
-        } else {
-          this.module[p][m].x = this.module[p][m].xEnd;
-          this.module[p][m].y = this.module[p][m].yEnd;
-          this.module[p][m].xH = this.module[p][m].xHend;
-          this.module[p][m].yH = this.module[p][m].yHend; 
+        } else if(this.ticker[p][m] < this.animWindow2[m]){
+          var tk0 = map(this.ticker[p][m], this.animWindow, this.animWindow2[m], 0, 1);
+
+          this.module[p][m].x = map(easeInQuart(tk0), 0, 1, this.module[p][m].xEnd, this.module[p][m].xStart);
+          this.module[p][m].y = map(easeInQuart(tk0), 0, 1, this.module[p][m].yEnd, this.module[p][m].yStart);
+          // this.module[p][m].xH = this.module[p][m].xHend;
+          // this.module[p][m].yH = this.module[p][m].yHend;
+          this.module[p][m].xH = map(easeInQuart(tk0), 0, 1, this.module[p][m].xHend, 0);
+          this.module[p][m].yH = map(easeInQuart(tk0), 0, 1, this.module[p][m].yHend, 0);
         }
 
         this.ticker[p][m] += this.tickerSpeed;
@@ -211,6 +218,8 @@ class SpurLetter {
       for(var m = 0; m < this.module[p].length; m++){
         var delayDist = dist(orgX, orgY, this.module[p][m].x, this.module[p][m].y);
         this.ticker[p][m] = map(delayDist, 0, width/2, 0, -15);
+
+        this.animWindow2[m]= this.animWindowClose + this.ticker[p][m];
       }
     }
   }
