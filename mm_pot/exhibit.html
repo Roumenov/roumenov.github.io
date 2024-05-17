@@ -1,0 +1,261 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STG _v.Potpourri</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.3/p5.min.js"></script>
+  <script type="text/javascript" src="resources/qrcode.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="sketch_potpourri.js" type="text/javascript"></script>
+  <script src="update.js" type="text/javascript"></script>
+  <script src="textures.js" type="text/javascript"></script>
+  <script src="animators.js" type="text/javascript"></script>
+
+  <script src="classBase.js" type="text/javascript"></script>
+  <script src="classLet.js" type="text/javascript"></script>
+  <script src="classSprinkle.js" type="text/javascript"></script>
+
+  <script src="classChunk.js" type="text/javascript"></script>
+  <script src="classChunkSquiggle.js" type="text/javascript"></script>
+  <script src="classChunkScribble.js" type="text/javascript"></script>
+  <script src="classChunkFlower.js" type="text/javascript"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&display=swap" rel="stylesheet">
+
+  <style> body {padding: 0; margin: 0;} canvas {vertical-align: top;} </style>
+</head>
+
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup" id="popup">
+      <span class="close" id="closePopup">&times;</span>
+      <div class="popup-content">
+        <div id="qrcode"></div>
+        <p>DOWNLOAD ON YOUR PHONE</p>
+      </div>
+  </div>
+</div>
+
+<div id="outerCanvas">
+  <div id="mainCanvas">
+  </div>
+</div>
+
+<div id="generatorInput">
+  <div id="contentHolder">
+  
+    <div class="content">
+      <div class="titleh2">
+        <h2>STG: v.Potpourri</h2>
+        <h2>@ motion motion</h2>
+        <p>a kinetic generator from <a href="https://www.instagram.com/kiel.d.m/">kielm</a><br></p>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="coupling1">
+        <textarea id="text0" rows=4 oninput="setText()"></textarea>
+      </div>
+    </div>
+
+    <div class="content"> 
+      <div class="coupling1"> 
+        <select name="fontChange" id="fontChange" onchange="setFont(this.value)">
+          <option value="0" selected="selected">Inter - Medium</option>
+          <option value="1">TT BlueScreens - Medium</option>
+          <option value="2">Editorial New - Thin</option>
+          <option value="3">Milligram - Heavy</option>
+          <option value="4">Neue Montreal - Light</option>
+        </select>
+      </div>
+
+      <div class="coupling1">
+        <div class="coupling_label"><h3>Size</h3></div>
+        <input class="slider" type="range" min="1" max="100" value="33" id="pgTextSize" oninput="setwWindowScale(this.value)">
+      </div>
+
+      <!-- <div id="ratioSet" class="coupling1">
+        <h4>Ratio</h4>
+        <div class="sizeEntry">
+          <input type="radio" id="window" name="saveSize" value=0 onclick="sizeSaveChange(this.value)">
+          <label for="window"><h3>Full</h3></label>
+        </div>
+        <div class="sizeEntry">
+          <input type="radio" id="vert" name="saveSize" value=1 onclick="sizeSaveChange(this.value)">
+          <label for="vert"><h3>9:16</h3></label>
+        </div>
+        <div class="sizeEntry">
+          <input type="radio" id="squa" name="saveSize" value=2 onclick="sizeSaveChange(this.value)" checked>
+          <label for="squa"><h3>1:1</h3></label>
+        </div>
+      </div> -->
+    </div>
+
+    <div class="content-sm">
+      <div class="colorRow">
+        <div class="colorCol">
+          <input type="color" id="foreColor" name="foreColor" value="#ffffff" oninput="setForeColor(this.value)">
+          <div class="color_label"><h3>Type</h3></div>
+        </div>
+        
+        <div class="colorCol">
+          <input type="color" id="bkgdColor" name="bkgdColor" value="#000000" oninput="setBkgdColor(this.value)">
+          <div class="color_label"><h3>Bkgd</h3></div>
+        </div>
+
+        <div class="colorCol">
+          <input type="color" id="accentColor" name="accentColor" value="#F2AEC7" oninput="setAccentColor(this.value)">
+          <div class="color_label"><h3>Accent</h3></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <h5>INTRO STAGE</h5>
+      <div class="selectPair">
+        <select name="stageAstrength" id="stageAstrength" class="stageSelect" onchange="setStageAstrength(this.value)">
+          <option value="0">Sine</option>
+          <option value="1">Cubic</option>
+          <option value="2">Circ</option>
+          <option value="3" selected="selected">Expo</option>
+          <option value="4">Back</option>
+          <option value="5">Bounce</option>
+          <option value="6">Elastic</option>
+        </select>
+
+        <select name="stageAdirect" id="stageAdirect" class="stageSelect" onchange="setStageAdirect(this.value)">
+          <option value="0">In</option>
+          <option value="1">Out</option>
+          <option value="2" selected="selected">In & Out</option>
+        </select>
+      </div>
+
+      <div class="coupling1">
+        <div class="coupling_label"><h3>Length</h3></div>
+        <input class="slider" type="range" min="1" max="100" value="50" id="stagAlength" oninput="setStageAlength(this.value)">
+      </div>
+    </div>
+
+    <div class="content">
+      <h5>OUTRO STAGE</h5>
+      <div class="selectPair">
+        <select name="stageBstrength" id="stageBstrength" class="stageSelect" onchange="setStageBstrength(this.value)">
+          <option value="0">Sine</option>
+          <option value="1">Cubic</option>
+          <option value="2">Circ</option>
+          <option value="3" selected="selected">Expo</option>
+          <option value="4">Back</option>
+          <option value="5">Bounce</option>
+          <option value="6">Elastic</option>
+        </select>
+
+        <select name="stageBdirect" id="stageBdirect" class="stageSelect" onchange="setStageBdirect(this.value)">
+          <option value="0">In</option>
+          <option value="1">Out</option>
+          <option value="2" selected="selected">In & Out</option>
+        </select>
+      </div>
+
+      <div class="coupling1">
+        <div class="coupling_label"><h3>Length</h3></div>
+        <input class="slider" type="range" min="1" max="100" value="50" id="stagBlength" oninput="setStageBlength(this.value)">
+      </div>
+
+      <div class="coupling1">
+        <div class="coupling_label"><h3>Pause</h3></div>
+        <input class="slider" type="range" min="1" max="100" value="50" id="stagClength" oninput="setStageClength(this.value)">
+      </div>
+    </div>
+
+    <!-- <div class="content-sm">
+      <div class="module">
+        <div class="radioModule">
+          <div class="radioColumn">
+            <div class="radioRow">
+              <div class="couplingEntry">
+                <input type="radio" id="tlOffset" name="setOffsetCenter" value=0 onclick="setOffsetCenter(this.value)">
+              </div>
+              <div class="couplingEntry">
+                <input type="radio" id="tcOffset" name="setOffsetCenter" value=1 onclick="setOffsetCenter(this.value)">
+              </div>
+              <div class="couplingEntry">
+                <input type="radio" id="trOffset" name="setOffsetCenter" value=2 onclick="setOffsetCenter(this.value)">
+              </div>
+            </div>
+            
+            <div class="radioRow">
+              <div class="couplingEntry">
+                <input type="radio" id="clOffset" name="setOffsetCenter" value=3 onclick="setOffsetCenter(this.value)">
+              </div>
+              <div class="couplingEntry">
+                <input type="radio" id="ccOffset" name="setOffsetCenter" value=4 onclick="setOffsetCenter(this.value)" checked>
+              </div>
+              <div class="couplingEntry">
+                <input type="radio" id="crOffset" name="setOffsetCenter" value=5 onclick="setOffsetCenter(this.value)">
+              </div>
+            </div>
+
+            <div class="radioRow">
+              <div class="couplingEntry">
+                <input type="radio" id="blOffset" name="setOffsetCenter" value=6 onclick="setOffsetCenter(this.value)">
+              </div>
+              <div class="couplingEntry">
+                <input type="radio" id="bcOffset" name="setOffsetCenter" value=7 onclick="setOffsetCenter(this.value)">
+              </div>
+              <div class="couplingEntry">
+                <input type="radio" id="brOffset" name="setOffsetCenter" value=8 onclick="setOffsetCenter(this.value)">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="coupling1">
+          <div class="coupling_label"><h3>Delay</h3></div>
+          <input class="slider" type="range" min="1" max="100" value="50" id="offsetAmount" oninput="setOffsetAmount(this.value)">
+        </div>
+      </div>
+    </div> -->
+
+    <!-- <div class="content-sm">
+      <div class="coupling1">
+        <button type="button" class="EXPORT" onclick="runShare()">EXPORT</button>
+      </div>
+    </div> -->
+
+  </div>
+</div>
+</body>
+  <!-- <input type="text" value="SPOOKY ACTION" id="text0" oninput="setText(this.value)"> -->
+
+  <script>
+    // When the user clicks on <div>, open the popup
+    function myFunction() {
+      var popup = document.getElementById("myPopup");
+      popup.classList.toggle("show");
+    }
+  </script>
+
+  <script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+  
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+  </script>
+</body> -->
+
+</html>
