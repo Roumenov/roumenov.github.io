@@ -322,18 +322,18 @@ function generateRandomPalette(){
     holdCol[4] = ('#f26d3d');
   }
 
-  var rs2 = random(15);
-  if(rs2 < 10){
-    foreColor = color('#ffffff');
-    document.getElementById('foreColor').value = "#ffffff";
-    bkgdColor = color('#000000');
-    document.getElementById('bkgdColor').value = "#000000";
-  } else {
-    foreColor = color('#000000');
-    document.getElementById('foreColor').value = "#000000";
-    bkgdColor = color('#ffffff');
-    document.getElementById('bkgdColor').value = "#ffffff";
-  }
+  // var rs2 = random(15);
+  // if(rs2 < 10){
+  //   foreColor = color('#ffffff');
+  //   document.getElementById('foreColor').value = "#ffffff";
+  //   bkgdColor = color('#000000');
+  //   document.getElementById('bkgdColor').value = "#000000";
+  // } else {
+  //   foreColor = color('#000000');
+  //   document.getElementById('foreColor').value = "#000000";
+  //   bkgdColor = color('#ffffff');
+  //   document.getElementById('bkgdColor').value = "#ffffff";
+  // }
 
   document.getElementById('triple0color').value = holdCol[0];
   document.getElementById('quint0color').value = holdCol[0];
