@@ -46,7 +46,7 @@ var inpNumber = 1;
 var presetSimple, presetJellyfish, presetCrown, presetComplex, presetWeave, presetZebra, presetHoops;
 
 function preload() {
- font = loadFont('assets/AguafinaScript-Regular.ttf');
+ font = loadFont('assets/IBMPlexMono-ExtraLightItalic.otf');
 }
 
 function setup(){
@@ -115,6 +115,7 @@ function draw(){
   bkgdColor = bkgdColorPicker.value();
   background(bkgdColor);
   inpText = String(inp.value());  
+  textFont('Comic Sans');
 
   radius = rSlider.value();
   stackNum = stackNumSlider.value();
