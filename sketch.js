@@ -53,7 +53,7 @@ function setup(){
   createCanvas(windowWidth,windowHeight, WEBGL);
   background(bkgdColor);
   smooth();
-  textFont(font);
+  textFont('Helvetica');
   frameRate(30);
   
   inp = select("#textfield");
