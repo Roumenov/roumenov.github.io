@@ -46,14 +46,14 @@ var inpNumber = 1;
 var presetSimple, presetJellyfish, presetCrown, presetComplex, presetWeave, presetZebra, presetHoops;
 
 function preload() {
- font = loadFont('assets/IBMPlexMono-Regular.otf');
+ font = loadFont('assets/AguafinaScript-Regular.ttf');
 }
 
 function setup(){
   createCanvas(windowWidth,windowHeight, WEBGL);
   background(bkgdColor);
   smooth();
-  textFont('Georgia');
+  textFont(font);
   frameRate(30);
   
   inp = select("#textfield");
